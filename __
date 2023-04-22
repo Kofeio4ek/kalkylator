@@ -1,11 +1,24 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QGridLayout, QLineEdit, QMainWindow, QSizePolicy
+from PyQt5.QtGui import QFont
+
+my_font = QFont('Segoe UI', 18)
+
 
 class StretchButton(QPushButton):
     def __init__(self, text):
         super().__init__(text)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setMinimumSize(40, 40)
+        self.setFont(my_font)
+        self.setStyleSheet('''
+        QPushButton{
+            background-color: #757575;
+            color: #453d39;
+            border: none;
+            border-radius: 15px
+        }   
+        ''')
 
 class Display(QLineEdit):
     def __init__(self):
@@ -13,13 +26,25 @@ class Display(QLineEdit):
         self.setReadOnly(True)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setMinimumSize(40, 40)
-
-class MW(QWidget):
+        self.setFont(my_font)
+        self.setStyleSheet('''
+        QLineEdit{
+            background-color: #757575;
+            color: #453d39;
+            border: 2px solid #c0c0c0;
+            border-radius: 15px;
+        }
+        ''')
+class MainWindow(QWidget):
     def __init__(self, ):
         super().__init__()
         self.setWindowTitle('КаЛьКуЛяТоР')
         self.to_solve = ''
-        
+        self.setStyleSheet('''
+        QWidget{
+            background-color: #303030;
+        }
+        ''')
         self.display = Display()
 
         layout = QGridLayout()
@@ -105,6 +130,6 @@ class MW(QWidget):
         self.display.setText(self.to_solve)
         
 app = QApplication([])
-mw = MW()     
+mw = MainWindow()     
 mw.show()
 app.exec()
